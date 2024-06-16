@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+                <style>
+        a{
+            color: black;
+            text-align:center;
+        }
+    </style>
+
+
+
+</head>
+<body style="background-color: #C4E2EE ;text-align:center">
+
+<h1>Program Rank</h1>
+
+<br>
+<br>
+
+<center>
+<a href="{% url 'index' %}">Home</a> <br>
+<a href="{% url 'QueryResults' %}">Query Results</a> <br>
+<a href="{% url 'RecordsManagement' %}">Records Management</a> <br>
+<a href="{% url 'Rankings' %}" >Rankings</a> <br>
+</center>
+
+<br>
+<br>
+
+<form method="post" style="text-align: center">
+     {% csrf_token %}
+
+    HID:            <select name="hidChosen" size="1" required>
+                    <option value="">--select an hid--</option>
+                    {% for content in allhID %}
+                        <option> {{ content.hID }} </option>
+                    {% endfor %}
+
+
+                    </select>
+    <br>
+    Program Name:   <select name="ProgramNameChosen" size="1" required>
+                    <option value="">--select a program name--</option>
+                    {% for content in allprograms %}
+                        <option> {{ content.title }} </option>
+                    {% endfor %}
+                    </select>
+
+
+    <br>
+    Rank:           <select type="number" name="rank" size="1" required>
+                    <option value="">--select a rank--</option>
+                    <option> 1 </option>
+                    <option> 2 </option>
+                    <option> 3 </option>
+                    <option> 4 </option>
+                    <option> 5 </option>
+                </select>
+    <br>
+    <button type="submit" value="Send"> Submit</button>
+
+<br>
+<br>
+
+   </form>
+
+
+<h1> Top 5 Popular Programs for a selected genre </h1>
+
+<form method="post">
+    {% csrf_token %}
+    Genre: <select name="genreChosen" size="1" required>
+                    <option value="">--select a genre--</option>
+                    {% for content in allGenre %}
+                        <option> {{ content.genre }} </option>
+                    {% endfor %}
+                    </select>
+    Min Rank: <input type="number" name="minRank" required>
+    <br>
+    <button type="submit" value="Send"> Submit</button>
+
+</form>
+
+<br>
+<br>
+
+{% if not flag %}
+    <table border="1" style="width: 70%">
+
+            <th>title</th>
+            <th>average rank</th>
+
+            {% for content in show_spoken %}
+                <tr>
+                    <td>{{ content.title}}</td>
+                    <td>{{ content.average }}</td>
+                </tr>
+            {% endfor %}
+    </table>
+{% endif %}
+
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+        <style>
+        a{
+            color: black;
+            text-align:center;
+        }
+    </style>
+
+
+    <style>
+        table{
+            color: black;
+             text-align:center;
+        }
+    </style>
+
+</head>
+
+
+<body style="background-color: #C4E2EE ;text-align:center">
+
+
+<h1>Queries</h1>
+
+<br>
+<br>
+
+<center>
+<a href="{% url 'index' %}">Home</a> <br>
+<a href="{% url 'QueryResults' %}">Query Results</a> <br>
+<a href="{% url 'RecordsManagement' %}">Records Management</a> <br>
+<a href="{% url 'Rankings' %}" >Rankings</a> <br>
+</center>
+
+<br>
+<br>
+
+
+{% load static %}
+
+<h2>Query 1:</h2>
+
+<center>
+<table border="1" style="width: 100%">
+
+        <th>Genre</th>
+        <th>Title</th>
+        <th>Duration</th>
+
+   {% for content in sql_res1 %}
+        <tr>
+            <td>{{ content.Genre }}</td>
+            <td>{{ content.Title }}</td>
+            <td>{{ content.Duration }}</td>
+        </tr>
+      {% endfor %}
+
+</table>
+</center>
+
+<br>
+<br>
+
+
+<center>
+<h2>Query 2:</h2>
+<table border="1" style="width: 70%">
+
+        <th>Title</th>
+        <th>Average Rank</th>
+
+        {% for content in sql_res2 %}
+            <tr>
+                <td>{{ content.Title }}</td>
+                <td>{{ content.AverageRank }}</td>
+            </tr>
+        {% endfor %}
+
+</table>
+</center>
+
+
+<br>
+<br>
+
+<h2>Query 3:</h2>
+<center>
+<table border="1" style="width: 70%">
+
+        <th>Title</th>
+
+         {% for content in sql_res3 %}
+                <tr>
+                    <td>{{ content.title }}</td>
+                </tr>
+            {% endfor %}
+
+</table>
+</center>
+
+</body>
+
+</html>
